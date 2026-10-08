@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元素（1番〜20番）マスタードリル</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background: linear-gradient(135deg, #090d16 0%, #111827 40%, #1e1b4b 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .font-serif-jp {
+            font-family: 'Shippori Mincho', serif;
+        }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card-interactive {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-interactive:hover {
+            border-color: rgba(129, 140, 248, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(99, 102, 241, 0.25);
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        @keyframes pulse-success {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .anim-success {
+            animation: pulse-success 0.6s ease-out;
+        }
+    </style>
+</head>
+<body class="text-slate-100 pb-16 selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header -->
+    <header class="border-b border-indigo-500/20 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 shadow-lg shadow-black/40">
+        <div class="max-w-5xl mx-auto px-4 py-3.5 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white text-xl shadow-lg shadow-indigo-500/30 font-serif-jp font-extrabold">
+                    素
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-black font-serif-jp tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200">
+                        元素＆不対電子マスタードリル
+                    </h1>
+                    <p class="text-xs text-indigo-300/70 font-medium">1番（H）〜 20番（Ca）完璧暗記アプリ</p>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-xs bg-indigo-950/80 text-indigo-300 border border-indigo-500/30 px-3 py-1.5 rounded-full font-semibold shadow-inner">
+                <i class="fa-solid fa-graduation-cap text-indigo-400"></i>
+                <span>高校化学基礎・必須暗記</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 pt-6">
+
+        <!-- Tab Controls -->
+        <div class="grid grid-cols-3 gap-1.5 p-1.5 bg-slate-900/80 rounded-2xl border border-indigo-500/20 mb-8 backdrop-blur shadow-2xl">
+            <button id="tab-table" onclick="switchTab('table')" class="py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/25">
+                <i class="fa-solid fa-list-check"></i>
+                <span>暗記一覧表</span>
+            </button>
+            <button id="tab-card" onclick="switchTab('card')" class="py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/60">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>単語カード</span>
+            </button>
+            <button id="tab-quiz" onclick="switchTab('quiz')" class="py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/60">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>確認テスト</span>
+            </button>
+        </div>
+
+        <!-- Study Table Section -->
+        <section id="sec-table" class="space-y-6">
+            
+            <!-- Guide Card -->
+            <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-indigo-400 shadow-xl space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center text-lg shrink-0">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-indigo-200 text-base font-serif-jp">最外殻電子数と不対電子のパターン</h3>
+                        <p class="text-xs text-slate-400">族・周期による電子の入り方のルール</p>
+                    </div>
+                </div>
+                <p class="text-xs sm:text-sm leading-relaxed text-slate-300">
+                    <span class="text-cyan-300 font-bold">最外殻電子数</span>は最外殻に存在する電子の総数（同族元素で同じ）、<span class="text-rose-400 font-bold">不対電子数</span>はフントの法則により <span class="text-rose-400 font-bold">1 ➔ 0 ➔ 1 ➔ 2 ➔ 3 ➔ 2 ➔ 1 ➔ 0</span> の規則的周期パターンを示します。
+                </p>
+            </div>
+
+            <!-- Mask Control Buttons -->
+            <div class="flex flex-wrap justify-between items-center gap-3 bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800">
+                <span class="text-xs text-slate-400 flex items-center gap-1.5">
+                    <i class="fa-solid fa-hand-pointer text-indigo-400"></i>
+                    セルを個別にタップしても隠す/開くことができます
+                </span>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="toggleTableMask('symbol')" id="btn-mask-symbol" class="bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/40 text-indigo-200 text-xs px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 font-medium">
+                        <i class="fa-solid fa-eye-slash"></i> 記号を伏せる
+                    </button>
+                    <button onclick="toggleTableMask('outer')" id="btn-mask-outer" class="bg-cyan-950/80 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-200 text-xs px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 font-medium">
+                        <i class="fa-solid fa-eye-slash"></i> 最外殻電子数を伏せる
+                    </button>
+                    <button onclick="toggleTableMask('unpaired')" id="btn-mask-unpaired" class="bg-rose-950/80 hover:bg-rose-900 border border-rose-500/40 text-rose-200 text-xs px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 font-medium">
+                        <i class="fa-solid fa-eye-slash"></i> 不対電子を伏せる
+                    </button>
+                </div>
+            </div>
+
+            <!-- Element Table -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-800 shadow-2xl">
+                <table class="w-full text-left border-collapse bg-slate-900/80 text-slate-200">
+                    <thead>
+                        <tr class="bg-slate-950/90 border-b border-slate-800 text-indigo-300 text-xs uppercase tracking-wider font-serif-jp">
+                            <th class="p-3.5 text-center">番号</th>
+                            <th class="p-3.5">元素名</th>
+                            <th class="p-3.5 text-center">元素記号</th>
+                            <th class="p-3.5 text-center">最外殻電子の数</th>
+                            <th class="p-3.5 text-center">不対電子数</th>
+                        </tr>
+                    </thead>
+                    <tbody id="element-table-body" class="divide-y divide-slate-800/60 text-sm font-medium">
+                        <!-- Dynamic JS Generation -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Flashcard Section -->
+        <section id="sec-card" class="hidden space-y-6">
+            
+            <!-- Card Mode Selection Screen -->
+            <div id="card-mode-select-screen" class="max-w-xl mx-auto space-y-5">
+                <div class="text-center space-y-2">
+                    <h2 class="text-2xl font-black font-serif-jp text-indigo-200">単語カード モード選択</h2>
+                    <p class="text-xs text-slate-400">暗記したいテーマを選択してフラッシュカードを開始します</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-3">
+                    <button onclick="startCardMode('unpaired')" class="glass-card-interactive p-4.5 rounded-2xl text-left flex items-center justify-between shadow-lg group">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl group-hover:scale-110 transition shrink-0">
+                                <i class="fa-solid fa-atom"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white font-serif-jp text-base">不対電子モード</h3>
+                                <p class="text-xs text-slate-400 mt-0.5">【表】元素名・記号・番号 ➔ 【裏】不対電子の数・最外殻電子数</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition"></i>
+                    </button>
+
+                    <button onclick="startCardMode('symbol_name')" class="glass-card-interactive p-4.5 rounded-2xl text-left flex items-center justify-between shadow-lg group">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl group-hover:scale-110 transition shrink-0">
+                                <i class="fa-solid fa-spell-check"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white font-serif-jp text-base">記号 ＆ 名前モード</h3>
+                                <p class="text-xs text-slate-400 mt-0.5">【表】原子番号 ➔ 【裏】元素名・元素記号</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition"></i>
+                    </button>
+
+                    <button onclick="startCardMode('number')" class="glass-card-interactive p-4.5 rounded-2xl text-left flex items-center justify-between shadow-lg group">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl group-hover:scale-110 transition shrink-0">
+                                <i class="fa-solid fa-hashtag"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white font-serif-jp text-base">原子番号モード</h3>
+                                <p class="text-xs text-slate-400 mt-0.5">【表】元素名・記号 ➔ 【裏】原子番号（1〜20）</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition"></i>
+                    </button>
+
+                    <button onclick="startCardMode('mix')" class="p-4.5 bg-gradient-to-r from-indigo-900/90 via-purple-900/90 to-pink-900/90 hover:from-indigo-800 hover:to-pink-800 border border-purple-400/40 rounded-2xl text-left flex items-center justify-between shadow-xl transition group">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-xl group-hover:scale-110 transition shrink-0">
+                                <i class="fa-solid fa-crown"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-amber-200 font-serif-jp text-base">全モードミックス</h3>
+                                <p class="text-xs text-indigo-200/80 mt-0.5">カードごとに質問テーマが変わる総合カード演習</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-shuffle text-amber-400 group-hover:rotate-180 transition duration-500"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card Play Screen -->
+            <div id="card-play-screen" class="hidden max-w-md mx-auto space-y-5">
+                
+                <!-- Status Header -->
+                <div class="flex justify-between items-center text-xs px-2">
+                    <button onclick="exitCardMode()" class="text-slate-400 hover:text-white transition flex items-center gap-1.5 font-bold">
+                        <i class="fa-solid fa-arrow-left"></i> モード選択へ
+                    </button>
+                    <span class="text-indigo-300 font-bold font-mono text-sm" id="card-progress">Card 1 / 20</span>
+                    <span id="card-mode-badge" class="bg-indigo-950 text-indigo-300 border border-indigo-500/40 px-2.5 py-0.5 rounded-full font-semibold">不対電子</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-800">
+                    <div id="card-progress-bar" class="bg-gradient-to-r from-indigo-500 to-purple-500 h-full transition-all duration-300" style="width: 5%;"></div>
+                </div>
+
+                <!-- Flip Card Container -->
+                <div class="perspective-1000 w-full h-80 cursor-pointer" onclick="flipCard()">
+                    <div id="card-inner" class="relative w-full h-full duration-500 transform-style-3d rounded-3xl shadow-2xl">
+                        
+                        <!-- Front Face -->
+                        <div class="absolute inset-0 w-full h-full rounded-3xl glass-panel border-2 border-indigo-500/30 p-6 flex flex-col justify-between items-center text-center backface-hidden shadow-indigo-950/50 shadow-2xl">
+                            <span class="text-xs bg-indigo-950/90 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full font-mono font-bold" id="card-front-tag">
+                                Question
+                            </span>
+                            <div class="my-auto space-y-2 w-full" id="card-front-content">
+                                <!-- Dynamic JS -->
+                            </div>
+                            <span class="text-xs text-indigo-300/80 font-medium flex items-center gap-1">
+                                <i class="fa-solid fa-rotate"></i> タップして答え（裏面）を表示
+                            </span>
+                        </div>
+
+                        <!-- Back Face -->
+                        <div class="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-indigo-950 via-slate-900 to-purple-950 border-2 border-purple-400/50 p-6 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 shadow-2xl">
+                            <span class="text-xs text-purple-300 border-b border-purple-500/30 pb-1 w-full font-mono font-bold" id="card-back-tag">
+                                Answer
+                            </span>
+                            
+                            <div class="my-auto space-y-3 w-full" id="card-back-content">
+                                <!-- Dynamic JS -->
+                            </div>
+
+                            <span class="text-xs text-purple-300/80 font-medium">タップして表面に戻す</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Card Nav Buttons -->
+                <div class="flex justify-between items-center gap-3 pt-2">
+                    <button onclick="prevCard()" class="flex-1 bg-slate-800/90 hover:bg-slate-800 text-slate-200 border border-slate-700 py-3.5 rounded-xl font-bold transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-chevron-left"></i> 前へ
+                    </button>
+                    <button onclick="shuffleCardDeck()" class="bg-slate-800/90 hover:bg-slate-800 text-indigo-300 border border-indigo-500/30 p-3.5 rounded-xl transition hover:rotate-180 duration-300" title="カードをシャッフル">
+                        <i class="fa-solid fa-shuffle"></i>
+                    </button>
+                    <button onclick="nextCard()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 py-3.5 rounded-xl font-bold transition flex items-center justify-center gap-2">
+                        次へ <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Confirmation Test Section -->
+        <section id="sec-quiz" class="hidden space-y-6">
+            
+            <!-- Quiz Mode Selection Screen -->
+            <div id="quiz-mode-screen" class="max-w-xl mx-auto space-y-5">
+                <div class="text-center space-y-2">
+                    <h2 class="text-2xl font-black font-serif-jp text-indigo-200">確認テスト モード選択</h2>
+                    <p class="text-xs text-slate-400">学習目的に合わせた問題形式で知識を定着させます</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-3">
+                    <button onclick="selectQuizMode('symbol_table')" class="glass-card-interactive p-4.5 rounded-2xl text-left flex items-center justify-between shadow-lg group border-2 border-indigo-500/40">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl group-hover:scale-110 transition shrink-0">
+                                <i class="fa-solid fa-table-cells"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h3 class="font-bold text-white font-serif-jp text-base">記号 ＆ 名前モード</h3>
+                                    <span class="bg-indigo-500/30 text-indigo-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-400/30">穴埋め書き込み</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-0.5">1〜20番の元素名・記号をキーボード入力して一括採点</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition"></i>
+                    </button>
+
+                    <button onclick="selectQuizMode('unpaired')" class="glass-card-interactive p-4.5 rounded-2xl text-left flex items-center justify-between shadow-lg group">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl group-hover:scale-110 transition shrink-0">
+                                <i class="fa-solid fa-atom"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white font-serif-jp text-base">不対電子モード</h3>
+                                <p class="text-xs text-slate-400 mt-0.5">元素から「不対電子の数」を4択クイズで回答（10問）</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition"></i>
+                    </button>
+
+                    <button onclick="selectQuizMode('number')" class="glass-card-interactive p-4.5 rounded-2xl text-left flex items-center justify-between shadow-lg group">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl group-hover:scale-110 transition shrink-0">
+                                <i class="fa-solid fa-hashtag"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white font-serif-jp text-base">原子番号モード</h3>
+                                <p class="text-xs text-slate-400 mt-0.5">元素から「原子番号（1〜20）」を4択クイズで回答（10問）</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500 group-hover:text-indigo-300 group-hover:translate-x-1 transition"></i>
+                    </button>
+
+                    <button onclick="selectQuizMode('mix')" class="p-4.5 bg-gradient-to-r from-indigo-900/90 via-purple-900/90 to-pink-900/90 hover:from-indigo-800 hover:to-pink-800 border border-purple-400/40 rounded-2xl text-left flex items-center justify-between shadow-xl transition group">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-xl group-hover:scale-110 transition shrink-0">
+                                <i class="fa-solid fa-fire text-amber-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-amber-200 font-serif-jp text-base">全モードミックス (総合4択)</h3>
+                                <p class="text-xs text-indigo-200/80 mt-0.5">全種類の4択問からランダム出題（10問）</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-bolt text-amber-400 group-hover:scale-125 transition"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table Fill-in Test Screen (Symbol & Name Mode) -->
+            <div id="quiz-symbol-table-screen" class="hidden space-y-6">
+                
+                <div class="flex flex-wrap justify-between items-center gap-3 glass-panel p-4 rounded-2xl border border-indigo-500/30">
+                    <div>
+                        <button onclick="backToQuizModes()" class="text-slate-400 hover:text-white transition text-xs font-bold flex items-center gap-1.5 mb-1">
+                            <i class="fa-solid fa-arrow-left"></i> モード選択へ
+                        </button>
+                        <h2 class="text-lg font-bold font-serif-jp text-indigo-200">1〜20番 元素名・元素記号 埋め込みドリル</h2>
+                        <p class="text-xs text-slate-400">空欄に入力して「採点する」を押してください</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="clearSymbolTableInputs()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-2 rounded-xl border border-slate-700 font-bold transition">
+                            <i class="fa-solid fa-eraser mr-1"></i> 全クリア
+                        </button>
+                        <button onclick="gradeSymbolTable()" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs sm:text-sm px-4 py-2 rounded-xl font-bold shadow-lg shadow-indigo-600/30 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-pen-check"></i> 一括採点する
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result Score Summary (Hidden by default) -->
+                <div id="symbol-table-score-card" class="hidden glass-panel p-5 rounded-2xl border-2 border-indigo-500/40 text-center space-y-2 bg-gradient-to-b from-indigo-950/80 to-slate-900">
+                    <span class="text-xs text-indigo-300 uppercase tracking-widest font-mono font-bold">DRILL RESULT</span>
+                    <div class="text-4xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200" id="symbol-table-score-text">
+                        40 / 40
+                    </div>
+                    <div class="text-xs text-slate-400 font-semibold" id="symbol-table-accuracy-text">正解率 100%</div>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-800 shadow-2xl">
+                    <table class="w-full text-left border-collapse bg-slate-900/80 text-slate-200">
+                        <thead>
+                            <tr class="bg-slate-950/90 border-b border-slate-800 text-indigo-300 text-xs uppercase tracking-wider font-serif-jp">
+                                <th class="p-3 text-center w-16">番号</th>
+                                <th class="p-3 w-1/2">元素名（入力）</th>
+                                <th class="p-3 text-center w-1/2">元素記号（入力）</th>
+                            </tr>
+                        </thead>
+                        <tbody id="symbol-table-input-body" class="divide-y divide-slate-800/60 text-sm">
+                            <!-- Dynamic Table Inputs JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-2">
+                    <button onclick="gradeSymbolTable()" class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white text-base font-bold px-8 py-3.5 rounded-xl shadow-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-check-double"></i> 採点する
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Standard 4-Choice Quiz Play Screen -->
+            <div id="quiz-play-screen" class="hidden max-w-xl mx-auto space-y-5 glass-panel p-6 rounded-3xl border border-indigo-500/30 shadow-2xl">
+                
+                <!-- Status Bar -->
+                <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-700/60 pb-3">
+                    <button onclick="backToQuizModes()" class="text-slate-400 hover:text-white transition font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-left"></i> 中断
+                    </button>
+                    <span id="quiz-progress-text" class="font-mono text-indigo-300 font-bold">第 1 / 10 問</span>
+                    <div class="flex items-center gap-3">
+                        <span id="quiz-mode-badge" class="bg-indigo-950 text-indigo-300 border border-indigo-500/40 px-2.5 py-0.5 rounded-full font-medium">不対電子</span>
+                        <span id="quiz-streak" class="text-amber-400 font-bold"><i class="fa-solid fa-fire mr-1"></i>0 連続</span>
+                    </div>
+                </div>
+
+                <!-- Quiz Progress Bar -->
+                <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-800">
+                    <div id="quiz-progress-bar" class="bg-gradient-to-r from-indigo-500 to-pink-500 h-full transition-all duration-300" style="width: 10%;"></div>
+                </div>
+
+                <!-- Question Title -->
+                <div class="text-center py-4 space-y-2">
+                    <span class="text-xs text-slate-400 font-mono tracking-widest uppercase">QUESTION</span>
+                    <h3 class="text-2xl font-extrabold font-serif-jp text-white leading-snug" id="quiz-question-text">
+                        <!-- Dynamic Question -->
+                    </h3>
+                </div>
+
+                <!-- Options Grid -->
+                <div id="quiz-options-grid" class="grid grid-cols-2 gap-3">
+                    <!-- Option Buttons -->
+                </div>
+
+                <!-- Feedback Message -->
+                <div id="quiz-feedback-box" class="hidden p-4 rounded-2xl text-sm leading-relaxed space-y-1">
+                    <div class="font-bold flex items-center gap-2 text-base" id="quiz-feedback-title"></div>
+                    <div class="text-xs opacity-90" id="quiz-feedback-detail"></div>
+                </div>
+
+                <!-- Next Button -->
+                <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:from-indigo-500 hover:to-pink-500 transition flex items-center justify-center gap-2 text-base">
+                    <span>次の問題へ</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Quiz Result Screen -->
+            <div id="quiz-result-screen" class="hidden max-w-xl mx-auto glass-panel p-8 rounded-3xl border border-indigo-500/30 text-center space-y-6 shadow-2xl">
+                <div class="space-y-2">
+                    <span class="text-xs uppercase text-indigo-300 tracking-widest font-mono font-bold">TEST COMPLETE</span>
+                    <h2 class="text-3xl font-black font-serif-jp text-white">確認テスト結果</h2>
+                </div>
+
+                <div class="py-5 bg-slate-950/80 rounded-2xl border border-slate-800 max-w-xs mx-auto shadow-inner">
+                    <div class="text-5xl font-black font-mono text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300" id="result-score-text">
+                        8 / 10
+                    </div>
+                    <div class="text-xs text-slate-400 mt-1 font-semibold" id="result-accuracy">正解率 80%</div>
+                </div>
+
+                <p class="text-sm text-slate-300 max-w-sm mx-auto leading-relaxed font-medium" id="result-comment">
+                    素晴らしい成績です！この調子で暗記を定着させましょう。
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button onclick="backToQuizModes()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 py-3.5 rounded-xl font-bold border border-slate-700 transition">
+                        モード選択へ
+                    </button>
+                    <button onclick="retryCurrentQuiz()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-indigo-600/30 transition">
+                        もう一度テスト
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        // 1〜20番 精密元素データ
+        const elementsData = [
+            { num: 1, name: "水素", symbol: "H", unpaired: 1, outerCount: 1 },
+            { num: 2, name: "ヘリウム", symbol: "He", unpaired: 0, outerCount: 2 },
+            { num: 3, name: "リチウム", symbol: "Li", unpaired: 1, outerCount: 1 },
+            { num: 4, name: "ベリリウム", symbol: "Be", unpaired: 0, outerCount: 2 },
+            { num: 5, name: "ホウ素", symbol: "B", unpaired: 1, outerCount: 3 },
+            { num: 6, name: "炭素", symbol: "C", unpaired: 2, outerCount: 4 },
+            { num: 7, name: "窒素", symbol: "N", unpaired: 3, outerCount: 5 },
+            { num: 8, name: "酸素", symbol: "O", unpaired: 2, outerCount: 6 },
+            { num: 9, name: "フッ素", symbol: "F", unpaired: 1, outerCount: 7 },
+            { num: 10, name: "ネオン", symbol: "Ne", unpaired: 0, outerCount: 8 },
+            { num: 11, name: "ナトリウム", symbol: "Na", unpaired: 1, outerCount: 1 },
+            { num: 12, name: "マグネシウム", symbol: "Mg", unpaired: 0, outerCount: 2 },
+            { num: 13, name: "アルミニウム", symbol: "Al", unpaired: 1, outerCount: 3 },
+            { num: 14, name: "ケイ素", symbol: "Si", unpaired: 2, outerCount: 4 },
+            { num: 15, name: "リン", symbol: "P", unpaired: 3, outerCount: 5 },
+            { num: 16, name: "硫黄", symbol: "S", unpaired: 2, outerCount: 6 },
+            { num: 17, name: "塩素", symbol: "Cl", unpaired: 1, outerCount: 7 },
+            { num: 18, name: "アルゴン", symbol: "Ar", unpaired: 0, outerCount: 8 },
+            { num: 19, name: "カリウム", symbol: "K", unpaired: 1, outerCount: 1 },
+            { num: 20, name: "カルシウム", symbol: "Ca", unpaired: 0, outerCount: 2 }
+        ];
+
+        // State Flags
+        let maskSymbolAll = false;
+        let maskOuterAll = false;
+        let maskUnpairedAll = false;
+
+        // Card Mode State
+        let cardMode = 'unpaired';
+        let cardDeck = [];
+        let cardIdx = 0;
+        let isFlipped = false;
+
+        // Quiz State
+        let currentQuizMode = 'mix';
+        let quizQueue = [];
+        let currentQuizIdx = 0;
+        let scoreCount = 0;
+        let streakCount = 0;
+
+        // Navigation Switch
+        function switchTab(tab) {
+            document.getElementById('sec-table').classList.add('hidden');
+            document.getElementById('sec-card').classList.add('hidden');
+            document.getElementById('sec-quiz').classList.add('hidden');
+
+            ['table', 'card', 'quiz'].forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tab) {
+                    btn.className = "py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/25";
+                } else {
+                    btn.className = "py-3 px-3 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-slate-800/60";
+                }
+            });
+
+            document.getElementById(`sec-${tab}`).classList.remove('hidden');
+        }
+
+        // --- Table Section Functions ---
+        function renderTable() {
+            const tbody = document.getElementById('element-table-body');
+            tbody.innerHTML = '';
+
+            elementsData.forEach(e => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-800/50 transition border-b border-slate-800/60";
+                
+                tr.innerHTML = `
+                    <td class="p-3.5 text-center font-mono font-bold text-slate-400">No. ${e.num}</td>
+                    <td class="p-3.5 font-bold font-serif-jp text-white">${e.name}</td>
+                    <td class="p-3.5 text-center font-mono font-bold text-indigo-300">
+                        <span class="cursor-pointer transition px-2.5 py-1 rounded-md ${maskSymbolAll ? 'bg-indigo-950 text-transparent border border-indigo-800 select-none' : ''}" 
+                              onclick="this.classList.toggle('text-transparent'); this.classList.toggle('bg-indigo-950'); this.classList.toggle('border');">
+                            ${e.symbol}
+                        </span>
+                    </td>
+                    <td class="p-3.5 text-center font-mono font-bold text-cyan-300">
+                        <span class="cursor-pointer transition px-2.5 py-1 rounded-md ${maskOuterAll ? 'bg-cyan-950 text-transparent border border-cyan-800 select-none' : ''}" 
+                              onclick="this.classList.toggle('text-transparent'); this.classList.toggle('bg-cyan-950'); this.classList.toggle('border');">
+                            ${e.outerCount} 個
+                        </span>
+                    </td>
+                    <td class="p-3.5 text-center font-bold text-rose-400">
+                        <span class="cursor-pointer transition px-2.5 py-1 rounded-md ${maskUnpairedAll ? 'bg-rose-950 text-transparent border border-rose-800 select-none' : ''}" 
+                              onclick="this.classList.toggle('text-transparent'); this.classList.toggle('bg-rose-950'); this.classList.toggle('border');">
+                            ${e.unpaired} 個
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function toggleTableMask(type) {
+            if (type === 'symbol') {
+                maskSymbolAll = !maskSymbolAll;
+                document.getElementById('btn-mask-symbol').innerHTML = maskSymbolAll ? 
+                    '<i class="fa-solid fa-eye"></i> 記号を表示' : '<i class="fa-solid fa-eye-slash"></i> 記号を伏せる';
+            } else if (type === 'outer') {
+                maskOuterAll = !maskOuterAll;
+                document.getElementById('btn-mask-outer').innerHTML = maskOuterAll ? 
+                    '<i class="fa-solid fa-eye"></i> 最外殻電子数を表示' : '<i class="fa-solid fa-eye-slash"></i> 最外殻電子数を伏せる';
+            } else if (type === 'unpaired') {
+                maskUnpairedAll = !maskUnpairedAll;
+                document.getElementById('btn-mask-unpaired').innerHTML = maskUnpairedAll ? 
+                    '<i class="fa-solid fa-eye"></i> 不対電子を表示' : '<i class="fa-solid fa-eye-slash"></i> 不対電子を伏せる';
+            }
+            renderTable();
+        }
+
+        // --- Card Mode Functions ---
+        function startCardMode(mode) {
+            cardMode = mode;
+            cardIdx = 0;
+            
+            cardDeck = elementsData.map(e => {
+                let subType = mode;
+                if (mode === 'mix') {
+                    const modes = ['unpaired', 'symbol_name', 'number'];
+                    subType = modes[Math.floor(Math.random() * modes.length)];
+                }
+
+                if (subType === 'unpaired') {
+                    return {
+                        modeName: "不対電子モード",
+                        frontTag: `原子番号 No. ${e.num}`,
+                        frontHTML: `<div class="text-4xl font-black font-serif-jp text-white">${e.name}</div><div class="text-base font-mono text-indigo-300 font-bold mt-1">（元素記号: ${e.symbol}）</div>`,
+                        backTag: "不対電子の数 ＆ 最外殻電子の数",
+                        backHTML: `
+                            <div class="text-xs text-slate-400 font-bold">${e.name} (${e.symbol})</div>
+                            <div class="text-4xl font-black text-rose-400 font-mono my-1">不対電子: ${e.unpaired} <span class="text-base">個</span></div>
+                            <div class="text-xs font-mono bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-700 text-cyan-300 inline-block">最外殻電子の数: ${e.outerCount} 個</div>
+                        `
+                    };
+                } else if (subType === 'symbol_name') {
+                    return {
+                        modeName: "記号＆名前モード",
+                        frontTag: `原子番号 No. ${e.num}`,
+                        frontHTML: `<div class="text-2xl font-serif-jp text-slate-300">原子番号 ${e.num} の</div><div class="text-3xl font-black font-serif-jp text-indigo-200 mt-1">元素名 ＆ 元素記号は？</div>`,
+                        backTag: "元素名 ＆ 元素記号",
+                        backHTML: `
+                            <div class="text-4xl font-black font-serif-jp text-white">${e.name}</div>
+                            <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-pink-300 font-mono my-1">${e.symbol}</div>
+                            <div class="text-xs text-slate-400 font-mono">原子番号: ${e.num}</div>
+                        `
+                    };
+                } else { // number
+                    return {
+                        modeName: "原子番号モード",
+                        frontTag: "原子番号は？",
+                        frontHTML: `<div class="text-4xl font-black font-serif-jp text-white">${e.name}</div><div class="text-3xl font-mono text-indigo-300 font-bold mt-1">${e.symbol}</div>`,
+                        backTag: "原子番号",
+                        backHTML: `
+                            <div class="text-xs text-slate-400 font-bold">${e.name} (${e.symbol})</div>
+                            <div class="text-6xl font-black text-amber-300 font-mono my-2">No. ${e.num}</div>
+                        `
+                    };
+                }
+            });
+
+            document.getElementById('card-mode-select-screen').classList.add('hidden');
+            document.getElementById('card-play-screen').classList.remove('hidden');
+
+            updateCardUI();
+        }
+
+        function exitCardMode() {
+            document.getElementById('card-play-screen').classList.add('hidden');
+            document.getElementById('card-mode-select-screen').classList.remove('hidden');
+        }
+
+        function shuffleCardDeck() {
+            cardDeck = cardDeck.sort(() => 0.5 - Math.random());
+            cardIdx = 0;
+            updateCardUI();
+        }
+
+        function updateCardUI() {
+            const card = cardDeck[cardIdx];
+            document.getElementById('card-progress').innerText = `Card ${cardIdx + 1} / ${cardDeck.length}`;
+            document.getElementById('card-progress-bar').style.width = `${((cardIdx + 1) / cardDeck.length) * 100}%`;
+            document.getElementById('card-mode-badge').innerText = card.modeName;
+
+            document.getElementById('card-front-tag').innerText = card.frontTag;
+            document.getElementById('card-front-content').innerHTML = card.frontHTML;
+
+            document.getElementById('card-back-tag').innerText = card.backTag;
+            document.getElementById('card-back-content').innerHTML = card.backHTML;
+
+            isFlipped = false;
+            document.getElementById('card-inner').classList.remove('rotate-y-180');
+        }
+
+        function flipCard() {
+            isFlipped = !isFlipped;
+            const inner = document.getElementById('card-inner');
+            if (isFlipped) {
+                inner.classList.add('rotate-y-180');
+            } else {
+                inner.classList.remove('rotate-y-180');
+            }
+        }
+
+        function nextCard() {
+            cardIdx = (cardIdx + 1) % cardDeck.length;
+            updateCardUI();
+        }
+
+        function prevCard() {
+            cardIdx = (cardIdx - 1 + cardDeck.length) % cardDeck.length;
+            updateCardUI();
+        }
+
+        // --- Quiz Test Functions ---
+        function selectQuizMode(mode) {
+            currentQuizMode = mode;
+            document.getElementById('quiz-mode-screen').classList.add('hidden');
+            document.getElementById('quiz-result-screen').classList.add('hidden');
+
+            if (mode === 'symbol_table') {
+                document.getElementById('quiz-play-screen').classList.add('hidden');
+                document.getElementById('quiz-symbol-table-screen').classList.remove('hidden');
+                initSymbolTableQuiz();
+            } else {
+                document.getElementById('quiz-symbol-table-screen').classList.add('hidden');
+                document.getElementById('quiz-play-screen').classList.remove('hidden');
+                scoreCount = 0;
+                streakCount = 0;
+                currentQuizIdx = 0;
+                generateQuizQueue();
+                showQuizQuestion();
+            }
+        }
+
+        function backToQuizModes() {
+            document.getElementById('quiz-play-screen').classList.add('hidden');
+            document.getElementById('quiz-symbol-table-screen').classList.add('hidden');
+            document.getElementById('quiz-result-screen').classList.add('hidden');
+            document.getElementById('quiz-mode-screen').classList.remove('hidden');
+        }
+
+        function retryCurrentQuiz() {
+            selectQuizMode(currentQuizMode);
+        }
+
+        // --- Symbol & Name Mode Fill-in-the-Blank Table Functions ---
+        function initSymbolTableQuiz() {
+            const tbody = document.getElementById('symbol-table-input-body');
+            tbody.innerHTML = '';
+            document.getElementById('symbol-table-score-card').classList.add('hidden');
+
+            elementsData.forEach(e => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-slate-800/60 hover:bg-slate-800/30 transition";
+                
+                tr.innerHTML = `
+                    <td class="p-3 text-center font-mono font-bold text-slate-400">No. ${e.num}</td>
+                    <td class="p-2.5">
+                        <input type="text" id="input-name-${e.num}" placeholder="元素名（例: 水素） font-medium"
+                               class="w-full bg-slate-950/90 border border-slate-700 focus:border-indigo-400 rounded-lg px-3 py-2 text-white placeholder-slate-600 focus:outline-none transition">
+                        <div id="feedback-name-${e.num}" class="text-xs font-bold mt-1 hidden"></div>
+                    </td>
+                    <td class="p-2.5 text-center">
+                        <input type="text" id="input-symbol-${e.num}" placeholder="記号（例: H）"
+                               class="w-full bg-slate-950/90 border border-slate-700 focus:border-indigo-400 rounded-lg px-3 py-2 text-white placeholder-slate-600 focus:outline-none transition text-center font-mono font-bold">
+                        <div id="feedback-symbol-${e.num}" class="text-xs font-bold mt-1 hidden"></div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function clearSymbolTableInputs() {
+            elementsData.forEach(e => {
+                const inputName = document.getElementById(`input-name-${e.num}`);
+                const inputSymbol = document.getElementById(`input-symbol-${e.num}`);
+                const fbName = document.getElementById(`feedback-name-${e.num}`);
+                const fbSymbol = document.getElementById(`feedback-symbol-${e.num}`);
+
+                inputName.value = '';
+                inputSymbol.value = '';
+                inputName.className = "w-full bg-slate-950/90 border border-slate-700 focus:border-indigo-400 rounded-lg px-3 py-2 text-white placeholder-slate-600 focus:outline-none transition";
+                inputSymbol.className = "w-full bg-slate-950/90 border border-slate-700 focus:border-indigo-400 rounded-lg px-3 py-2 text-white placeholder-slate-600 focus:outline-none transition text-center font-mono font-bold";
+
+                fbName.classList.add('hidden');
+                fbSymbol.classList.add('hidden');
+            });
+
+            document.getElementById('symbol-table-score-card').classList.add('hidden');
+        }
+
+        function gradeSymbolTable() {
+            let correctCount = 0;
+            const totalQuestions = elementsData.length * 2; // 20 names + 20 symbols
+
+            elementsData.forEach(e => {
+                const inputNameEl = document.getElementById(`input-name-${e.num}`);
+                const inputSymbolEl = document.getElementById(`input-symbol-${e.num}`);
+                const fbName = document.getElementById(`feedback-name-${e.num}`);
+                const fbSymbol = document.getElementById(`feedback-symbol-${e.num}`);
+
+                const userName = inputNameEl.value.trim();
+                const userSymbol = inputSymbolEl.value.trim();
+
+                // Check Name
+                if (userName === e.name) {
+                    correctCount++;
+                    inputNameEl.className = "w-full bg-emerald-950/60 border-2 border-emerald-500 rounded-lg px-3 py-2 text-emerald-200 focus:outline-none font-bold";
+                    fbName.className = "text-xs font-bold text-emerald-400 mt-1 flex items-center gap-1";
+                    fbName.innerHTML = `<i class="fa-solid fa-circle-check"></i> 正解`;
+                } else {
+                    inputNameEl.className = "w-full bg-rose-950/60 border-2 border-rose-500 rounded-lg px-3 py-2 text-rose-200 focus:outline-none font-bold";
+                    fbName.className = "text-xs font-bold text-rose-400 mt-1 flex items-center gap-1";
+                    fbName.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> 正解: ${e.name}`;
+                }
+                fbName.classList.remove('hidden');
+
+                // Check Symbol (Case-insensitive check with fallback)
+                if (userSymbol.toLowerCase() === e.symbol.toLowerCase()) {
+                    correctCount++;
+                    inputSymbolEl.className = "w-full bg-emerald-950/60 border-2 border-emerald-500 rounded-lg px-3 py-2 text-emerald-200 text-center font-mono font-bold focus:outline-none";
+                    fbSymbol.className = "text-xs font-bold text-emerald-400 mt-1 flex items-center justify-center gap-1";
+                    fbSymbol.innerHTML = `<i class="fa-solid fa-circle-check"></i> 正解`;
+                } else {
+                    inputSymbolEl.className = "w-full bg-rose-950/60 border-2 border-rose-500 rounded-lg px-3 py-2 text-rose-200 text-center font-mono font-bold focus:outline-none";
+                    fbSymbol.className = "text-xs font-bold text-rose-400 mt-1 flex items-center justify-center gap-1";
+                    fbSymbol.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> 正解: ${e.symbol}`;
+                }
+                fbSymbol.classList.remove('hidden');
+            });
+
+            // Show Result Summary
+            const scorePercent = Math.round((correctCount / totalQuestions) * 100);
+            const scoreCard = document.getElementById('symbol-table-score-card');
+            document.getElementById('symbol-table-score-text').innerText = `${correctCount} / ${totalQuestions}`;
+            document.getElementById('symbol-table-accuracy-text').innerText = `正解率 ${scorePercent}% (${correctCount}項目正解)`;
+            scoreCard.classList.remove('hidden');
+
+            window.scrollTo({ top: scoreCard.offsetTop - 100, behavior: 'smooth' });
+        }
+
+        // --- Standard 4-Choice Quiz Functions ---
+        function generateQuizQueue() {
+            quizQueue = [];
+            const shuffledElements = [...elementsData].sort(() => 0.5 - Math.random()).slice(0, 10);
+
+            shuffledElements.forEach(e => {
+                let type = currentQuizMode;
+                if (type === 'mix') {
+                    const types = ['unpaired', 'number'];
+                    type = types[Math.floor(Math.random() * types.length)];
+                }
+
+                if (type === 'unpaired') {
+                    quizQueue.push({
+                        badge: "不対電子モード",
+                        qText: `「${e.name} (${e.symbol})」の不対電子の数は？`,
+                        correct: `${e.unpaired} 個`,
+                        options: createUniqueOptions(`${e.unpaired} 個`, ['0 個', '1 個', '2 個', '3 個']),
+                        detail: `${e.name} (${e.symbol}) の最外殻電子数は ${e.outerCount} 個、不対電子は 【 ${e.unpaired} 個 】 です。`
+                    });
+                } else if (type === 'number') {
+                    quizQueue.push({
+                        badge: "原子番号モード",
+                        qText: `「${e.name} (${e.symbol})」の原子番号は？`,
+                        correct: `No. ${e.num}`,
+                        options: createNumberOptions(e.num),
+                        detail: `${e.name} (${e.symbol}) の原子番号は 【 No. ${e.num} 】 です。`
+                    });
+                }
+            });
+        }
+
+        function createUniqueOptions(correct, set) {
+            let opts = new Set([correct]);
+            while (opts.size < 4) {
+                opts.add(set[Math.floor(Math.random() * set.length)]);
+            }
+            return Array.from(opts).sort(() => 0.5 - Math.random());
+        }
+
+        function createNumberOptions(correctNum) {
+            let opts = new Set([`No. ${correctNum}`]);
+            while (opts.size < 4) {
+                const randNum = Math.floor(Math.random() * 20) + 1;
+                opts.add(`No. ${randNum}`);
+            }
+            return Array.from(opts).sort(() => 0.5 - Math.random());
+        }
+
+        function showQuizQuestion() {
+            const q = quizQueue[currentQuizIdx];
+            document.getElementById('quiz-progress-text').innerText = `第 ${currentQuizIdx + 1} / 10 問`;
+            document.getElementById('quiz-progress-bar').style.width = `${((currentQuizIdx + 1) / 10) * 100}%`;
+            document.getElementById('quiz-mode-badge').innerText = q.badge;
+            document.getElementById('quiz-streak').innerHTML = `<i class="fa-solid fa-fire mr-1"></i>${streakCount} 連続`;
+            document.getElementById('quiz-question-text').innerText = q.qText;
+
+            const grid = document.getElementById('quiz-options-grid');
+            grid.innerHTML = '';
+
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "w-full bg-slate-800/90 hover:bg-indigo-900/70 border border-slate-700 hover:border-indigo-400 text-slate-100 font-bold py-3.5 px-4 rounded-xl transition text-center shadow-md text-base";
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(opt, btn);
+                grid.appendChild(btn);
+            });
+
+            document.getElementById('quiz-feedback-box').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+        }
+
+        function checkQuizAnswer(selected, clickedBtn) {
+            const q = quizQueue[currentQuizIdx];
+            const feedbackBox = document.getElementById('quiz-feedback-box');
+            const feedbackTitle = document.getElementById('quiz-feedback-title');
+            const feedbackDetail = document.getElementById('quiz-feedback-detail');
+            const buttons = document.getElementById('quiz-options-grid').querySelectorAll('button');
+
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (btn.innerText === q.correct) {
+                    btn.className = "w-full bg-emerald-600 text-white font-bold py-3.5 px-4 rounded-xl text-center shadow-lg border border-emerald-400";
+                } else if (btn === clickedBtn && selected !== q.correct) {
+                    btn.className = "w-full bg-rose-600 text-white font-bold py-3.5 px-4 rounded-xl text-center shadow-lg border border-rose-400 opacity-80";
+                } else {
+                    btn.className = "w-full bg-slate-900/50 text-slate-500 font-bold py-3.5 px-4 rounded-xl text-center border border-slate-800";
+                }
+            });
+
+            if (selected === q.correct) {
+                scoreCount++;
+                streakCount++;
+                clickedBtn.classList.add('anim-success');
+                feedbackBox.className = "p-4 rounded-2xl text-sm leading-relaxed space-y-1 bg-emerald-950/90 border border-emerald-500/50 text-emerald-200 shadow-xl";
+                feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 text-xl"></i> 正解！`;
+            } else {
+                streakCount = 0;
+                feedbackBox.className = "p-4 rounded-2xl text-sm leading-relaxed space-y-1 bg-rose-950/90 border border-rose-500/50 text-rose-200 shadow-xl";
+                feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-400 text-xl"></i> 不正解...（正解: ${q.correct}）`;
+            }
+
+            feedbackDetail.innerText = q.detail;
+            feedbackBox.classList.remove('hidden');
+            document.getElementById('quiz-streak').innerHTML = `<i class="fa-solid fa-fire mr-1"></i>${streakCount} 連続`;
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuizIdx++;
+            if (currentQuizIdx < quizQueue.length) {
+                showQuizQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            document.getElementById('quiz-play-screen').classList.add('hidden');
+            document.getElementById('quiz-result-screen').classList.remove('hidden');
+
+            const scorePercent = (scoreCount / 10) * 100;
+            document.getElementById('result-score-text').innerText = `${scoreCount} / 10`;
+            document.getElementById('result-accuracy').innerText = `正解率 ${scorePercent}%`;
+
+            const comment = document.getElementById('result-comment');
+            if (scoreCount === 10) {
+                comment.innerText = "パーフェクト！元素名・番号・不対電子・最外殻電子数が完璧に習得されています！ 🎉";
+            } else if (scoreCount >= 7) {
+                comment.innerText = "素晴らしい成績です！間違えた問題は単語カードで重点的に復習してみましょう！ 👍";
+            } else {
+                comment.innerText = "暗記一覧表で基本パターンをチェックして、もう一度挑戦してみましょう！ 💪";
+            }
+        }
+
+        // Initialize Application
+        window.onload = function() {
+            renderTable();
+        };
+    </script>
+</body>
+</html>
